@@ -1,9 +1,11 @@
-# /reviewthis
-
-Description: Performs a hybrid v3.0 code review (Standard Plugin + Deep Arch Analysis) on a Pull Request.
-Argument: pr_number - The PR number to review
-
 ---
+name: reviewthis
+description: Performs a hybrid v3.0 code review (Standard Plugin + Deep Arch Analysis) on a Pull Request. Usage: /reviewthis <pr_number>
+---
+
+# Code Review Protocol v3.0 (The Hybrid)
+
+You will receive a PR number as an argument. Use it wherever you see `<pr_number>`.
 
 ## Phase 1: Context & Pre-flight
 

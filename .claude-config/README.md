@@ -6,8 +6,10 @@ This directory contains reusable Claude Code skills and agents for code review.
 
 ```
 .claude-config/
+├── README.md
 ├── skills/
-│   └── reviewthis.md      # /reviewthis skill - Hybrid v3.0 PR code review
+│   └── reviewthis/
+│       └── SKILL.md           # /reviewthis skill - Hybrid v3.0 PR code review
 └── agents/
     ├── arch-critic.md                  # (opus) - Socratic architectural critic
     ├── architecture-pattern-advisor.md # (sonnet) - Enterprise pattern advisor
@@ -19,36 +21,37 @@ This directory contains reusable Claude Code skills and agents for code review.
 
 ## Installation
 
-To use these globally across all your repositories, copy them to your home `.claude` directory:
+Copy the skills and agents to your global `~/.claude/` directory:
+
+### Windows (Git Bash / WSL)
+```bash
+# Copy skills (preserving directory structure)
+cp -r .claude-config/skills/* ~/.claude/skills/
+
+# Copy agents
+cp -r .claude-config/agents/* ~/.claude/agents/
+```
 
 ### Windows (PowerShell)
 ```powershell
-# Create directories if they don't exist
+# Create directories
 New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.claude\skills"
 New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.claude\agents"
 
-# Copy files
+# Copy skills and agents
 Copy-Item -Path ".\.claude-config\skills\*" -Destination "$env:USERPROFILE\.claude\skills\" -Recurse -Force
 Copy-Item -Path ".\.claude-config\agents\*" -Destination "$env:USERPROFILE\.claude\agents\" -Recurse -Force
 ```
 
-### Windows (Git Bash / WSL)
-```bash
-mkdir -p ~/.claude/skills ~/.claude/agents
-cp -r .claude-config/skills/* ~/.claude/skills/
-cp -r .claude-config/agents/* ~/.claude/agents/
-```
-
 ### Linux / macOS
 ```bash
-mkdir -p ~/.claude/skills ~/.claude/agents
 cp -r .claude-config/skills/* ~/.claude/skills/
 cp -r .claude-config/agents/* ~/.claude/agents/
 ```
 
 ## Usage
 
-After installation, restart Claude Code. The skill will be available:
+After installation, **restart Claude Code**. The skill will be available:
 
 ```
 /reviewthis <pr_number>
@@ -75,6 +78,25 @@ This will:
 | solid-principles-analyzer | sonnet | SOLID + TDA compliance |
 | sre-security-auditor | haiku | Security, reliability, bugs |
 | test-gap-analyst | haiku | Test coverage gaps |
+
+## Skill Format
+
+Skills must follow this structure:
+```
+skills/
+└── <skill-name>/
+    └── SKILL.md    # Required - contains frontmatter and instructions
+```
+
+The `SKILL.md` file needs YAML frontmatter:
+```yaml
+---
+name: my-skill
+description: What the skill does
+---
+
+# Instructions here...
+```
 
 ## Customization
 
